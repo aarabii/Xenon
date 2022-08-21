@@ -1,7 +1,13 @@
 const client = require("..");
 const chalk = require("chalk");
+var express = require("express");
+var app = express();
 
 client.on("ready", () => {
+  app.get("/", (req, res) => {
+    res.send("Express is ready");
+  });
+
   const activities = [
     { name: `${client.guilds.cache.size} Servers`, type: 2 }, // LISTENING
     { name: `${client.channels.cache.size} Channels`, type: 0 }, // PLAYING
@@ -22,5 +28,8 @@ client.on("ready", () => {
     client.user.setStatus(status[s]);
     s++;
   }, 30000);
+  app.listen(3000, () => {
+    console.log("Express started");
+  });
   console.log(chalk.red(`Logged in as ${client.user.tag}!`));
 });
