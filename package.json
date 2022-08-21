@@ -17,10 +17,11 @@
   "dependencies": {
     "@discordjs/rest": "^1.0.1",
     "ascii-table": "^0.0.9",
-    "chalk": "^5.0.1",
+    "chalk": "^2.4.2",
     "discord-api-types": "^0.37.3",
     "discord.js": "^14.2.0",
     "dotenv": "^16.0.1",
+    "dream-api": "^1.0.8",
     "express": "^4.18.1",
     "moment": "^2.29.4",
     "ms": "^2.1.3",
