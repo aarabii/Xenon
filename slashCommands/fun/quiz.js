@@ -33,26 +33,21 @@ module.exports = {
   run: async (client, interaction) => {
     const qna = await getTriviaQuestion();
     const row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder().setCustomId("option1").setLabel("Option 1").setStyle(ButtonStyle.Success),
-      new ButtonBuilder().setCustomId("option2").setLabel("Option 2").setStyle(ButtonStyle.Success),
-      new ButtonBuilder().setCustomId("option3").setLabel("Option 3").setStyle(ButtonStyle.Success),
-      new ButtonBuilder().setCustomId("option4").setLabel("Option 4").setStyle(ButtonStyle.Success)
+      ...qna.answers.map((answer, i) => {
+        return new ButtonBuilder()
+          .setCustomId(answer.isCorrect ? "TRUE" : `FALSE${i}`) // custom id cannot be duplicated
+          .setLabel(answer.answerText)
+          .setStyle(ButtonStyle.Success);
+      })
     );
     const embed = new EmbedBuilder()
       .setColor(0x0099ff)
       .setTitle(qna.question)
-      .addFields(
-        ...qna.answers.map((answer, i) => {
-          return { name: `Option ${i + 1}`, value: answer.answerText };
-        })
-      )
       .setTimestamp()
       .setFooter({
         text: `Requested by: ${interaction.user.username}`,
         iconURL: interaction.user.displayAvatarURL(),
       });
-    // experimental
-    // interaction.qna = qna;
 
     await interaction.reply({ ephemeral: false, embeds: [embed], components: [row] });
   },

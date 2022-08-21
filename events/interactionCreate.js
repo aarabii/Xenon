@@ -17,7 +17,6 @@ client.on("interactionCreate", async (interaction) => {
 
   // Handle Button Interactions
   if (interaction.type == 3) {
-    console.log("BUTTONINTERACTIONHANDLER ", client.buttonInteractions.get(interaction.message.interaction.commandName));
     client.buttonInteractions.get(interaction.message.interaction.commandName).run(client, interaction);
   }
 
