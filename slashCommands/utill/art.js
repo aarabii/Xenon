@@ -146,6 +146,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle("Art")
             .setColor("#ffffff")
+            .setDescription(`**Description :** ${description}`)
             .setFooter({
                 text: `Requested by ${interaction.user.username}`,
                 iconURL: interaction.user.displayAvatarURL({ extension: "jpg" }),
@@ -165,7 +166,7 @@ module.exports = {
                 new ButtonBuilder()
                     .setLabel("AI-ToS")
                     .setStyle(ButtonStyle.Link)
-                    .setURL(image.result.final)
+                    .setURL("https://www.w.ai/terms-of-service-wombo-dream")
                     .setEmoji("⚖️")
             )
 
