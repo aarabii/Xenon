@@ -31,6 +31,7 @@ module.exports = {
         await wait(100);
         await interaction.editReply({
             embeds: [embed],
+            content: `${member}`,
         });
     }
 }
