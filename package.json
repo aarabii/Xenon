@@ -18,7 +18,7 @@
     "@discordjs/rest": "^0.4.0-dev.1648166871.cedd053",
     "ascii-table": "^0.0.9",
     "chalk": "^2.4.1",
-    "discord-api-types": "^0.30.0",
+    "discord-api-types": "^0.37.3",
     "discord.js": "^14.2.0",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
