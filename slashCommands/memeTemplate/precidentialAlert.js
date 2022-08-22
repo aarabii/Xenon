@@ -24,7 +24,7 @@ module.exports = {
         const image = await imageBuf.buffer();
 
         const attachment = new AttachmentBuilder(image, {
-            name: "drake.png",
+            name: "precidentialalert.png",
         });
         await interaction.editReply({
             content: `${interaction.member} here is your presidential alert meme.`,

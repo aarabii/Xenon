@@ -11,37 +11,48 @@ const CHANNEL = "1010908789450494096";
 
 client.on("ready", async (message) => {
   const channel = client.channels.cache.get(CHANNEL);
+  try {
+    setInterval(() => {
+      const queryArr = ["programming", "coding", "code", "technology"];
+      const query = queryArr[Math.floor(Math.random() * queryArr.length)];
 
-  const url = `https://newsapi.org/v2/top-headlines?country=in&apiKey=${NEWS_API_KEY}`;
+      fetch(
+        `https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&apiKey=${NEWS_API_KEY}`
+      )
+        .then((res) => res.json())
+        .then((json) => {
+          const articles = json.articles;
+          const article = articles[Math.floor(Math.random() * articles.length)];
+          const embed = new EmbedBuilder()
+            .setTitle(article.title)
+            .setDescription(article.description)
+            .setThumbnail(article.urlToImage)
+            .setURL(article.url)
+            .setColor("#00ff00")
+            .setTimestamp();
 
-  const res = await fetch(url);
-  const json = await res.json();
-  const articles = json.articles;
-  const article = articles[Math.floor(Math.random() * articles.length)];
+            const row = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setLabel("Read more...")
+                    .setStyle(ButtonStyle.Link)
+                    .setURL(article.url)
+                    .setEmoji("📰")
+            )
 
-  const embed = new EmbedBuilder()
-    .setTitle(article.title)
-    .setAuthor({
-      name: article.source.name,
-    })
-    .setDescription(article.description)
-    .setURL(article.url)
-    .setThumbnail(article.urlToImage)
-    .setColor("#ffffff")
-    .setTimestamp();
-
-  const row = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setLabel("Read More...")
-      .setStyle(ButtonStyle.Link)
-      .setURL(article.url)
-      .setEmoji("📥")
-  );
-
-  setInterval(() => {
+          channel.send({
+            embeds: [embed],
+            components: [row]
+          });
+        });
+    }, 1000 * 60 * 15);
+  } catch (error) {
     channel.send({
-      embeds: [embed],
-      omponents: [row],
-    });
-  }, 1000 * 60 * 60);
+      content: `${error}`,
+    }).then(() => {
+      setTimeout((m) => {
+        m.delete();
+      }, 5000);
+    })
+  }
 });
