@@ -1,10 +1,5 @@
-const {
-  Client,
-  GatewayIntentBits,
-  Partials,
-  Collection,
-  GuildMember,
-} = require("discord.js");
+const { Client, GatewayIntentBits, Partials, Collection, GuildMember } = require("discord.js");
+const { readdirSync } = require("fs");
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -15,13 +10,7 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
     GatewayIntentBits.GuildMembers,
   ],
-  partials: [
-    Partials.Channel,
-    Partials.Message,
-    Partials.User,
-    Partials.GuildMember,
-    Partials.Reaction,
-  ],
+  partials: [Partials.Channel, Partials.Message, Partials.User, Partials.GuildMember, Partials.Reaction],
 });
 
 const config = require("./config.json");
@@ -30,12 +19,16 @@ require("dotenv").config(); // remove this line if you are using replit
 client.commands = new Collection();
 client.aliases = new Collection();
 client.slashCommands = new Collection();
+client.buttonInteractions = new Collection();
 client.prefix = config.prefix;
 
 module.exports = client;
 
-["command", "slashCommand", "events"].forEach((handler) => {
-  require(`./handlers/${handler}`)(client);
-});
+// ["command", "slashCommand", /*"buttons",*/ "events"].forEach((handler) => {
+readdirSync("./handlers")
+  .filter((name) => name.endsWith("js"))
+  .forEach((handler) => {
+    require(`./handlers/${handler}`)(client);
+  });
 
 client.login(process.env.TOKEN);
