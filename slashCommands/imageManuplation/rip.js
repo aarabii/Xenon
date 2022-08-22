@@ -5,8 +5,8 @@ const {
   const { Canvas } = require("canvacord");
   
   module.exports = {
-    name: "hitler",
-    description: "hitler user",
+    name: "rip",
+    description: "rip user",
     type: ApplicationCommandType.ChatInput,
     cooldown: 3000,
     options: [
@@ -23,13 +23,13 @@ const {
       const avatar = user.displayAvatarURL({
         format: "png",
       });
-      const image = await Canvas.hitler(avatar);
+      const image = await Canvas.rip(avatar);
       const attachment = new AttachmentBuilder(image, {
-        name: "hitler.png",
+        name: "rip.png",
       });
   
       await interaction.editReply({
-        content: `${user} is worse than Hitler now! ಠ▄ಠ`,
+        content: `RIP ${user} 🙏🥲`,
         files: [attachment],
       });
     },
