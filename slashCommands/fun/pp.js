@@ -43,7 +43,7 @@ module.exports = {
       .setThumbnail(Member.displayAvatarURL());
 
     await interaction.editReply({
-      content: `${Member}'s Gay percentage`,
+      content: `${Member}'s PP size`,
       embeds: [embed],
     });
   },
