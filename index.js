@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Partials, Collection, GuildMember } = require("discord.js");
+const { Client, GatewayIntentBits, Partials, Collection } = require("discord.js");
 const { readdirSync } = require("fs");
 const client = new Client({
   intents: [
@@ -14,7 +14,7 @@ const client = new Client({
 });
 
 const config = require("./config.json");
-require("dotenv").config(); // remove this line if you are using replit
+require("dotenv").config();
 
 client.commands = new Collection();
 client.aliases = new Collection();
