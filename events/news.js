@@ -45,7 +45,7 @@ client.on("ready", async (message) => {
             components: [row]
           });
         });
-    }, Math.floor(Math.random()*(60-15+1)+15));
+    }, 1000 * 60 * 30);
   } catch (error) {
     channel.send({
       content: `${error}`,
