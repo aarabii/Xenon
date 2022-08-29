@@ -12,11 +12,11 @@ const CHANNEL = "1010908789450494096";
 client.on("ready", async (message) => {
   const channel = client.channels.cache.get(CHANNEL);
   try {
-    setInterval(() => {
+    setInterval(async () => {
       const queryArr = ["programming", "coding", "code", "technology"];
       const query = queryArr[Math.floor(Math.random() * queryArr.length)];
 
-      fetch(
+      await fetch(
         `https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&apiKey=${NEWS_API_KEY}`
       )
         .then((res) => res.json())
@@ -45,7 +45,7 @@ client.on("ready", async (message) => {
             components: [row]
           });
         });
-    }, 1000 * 60 * 30);
+    }, 1000 * 60 * 60);
   } catch (error) {
     channel.send({
       content: `${error}`,
