@@ -68,7 +68,7 @@ client.on("ready", async (message) => {
         embeds: [embed],
         components: [row],
       });
-    }, 1000 * 60 * 15);
+    }, 1000 * 60 * Math.floor(Math.random()*(60-15+1)+15));
   } catch (error) {
     const Err_embed = new EmbedBuilder()
       .setTitle(`Error`)
