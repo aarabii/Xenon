@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, RESTJSONErrorCodes } = require("discord.js");
 const client = require("..");
 const CHANNEL = "1010558786592849950";
 
@@ -7,7 +7,7 @@ client.on("messageCreate", async () => {
 
   process.setMaxListeners(0);
 
-  process.on("unhandledRejection", (error) => {
+  process.on("unhandledRejection", (error, message) => {   
     const errEmbed = new EmbedBuilder()
       .setTitle("Unhandled Rejection")
       .setColor("Red")

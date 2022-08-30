@@ -43,7 +43,8 @@ client.on("ready", async (message) => {
       const author = response.author;
 
       const embed = new EmbedBuilder()
-        .setTitle(`${title}`)
+        .setTitle("Memes... 😂")
+        .setDescription(`${title}`)
         .setColor("#FFA500")
         .setImage(`${imageURL}`)
         .setTimestamp()
