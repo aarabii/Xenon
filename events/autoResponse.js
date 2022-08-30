@@ -48,24 +48,4 @@ client.on('messageCreate', async (msg) => {
         })
     }
 
-    if(msg.author.id == '780313218290548806') {
-        const percentNum = Math.random()
-
-        const resultArr = [
-            "SIMP",
-            "BIMC",
-        ]
-
-        const result = resultArr[Math.floor(Math.random() * resultArr.length)];
-
-        var reply;
-        if (percentNum > 0 && percentNum < 0.15) {
-            reply = `${result}`
-        } else {
-            reply = ''
-        }
-        msg.reply({
-            content: `${reply}`
-        })
-    }
 })
