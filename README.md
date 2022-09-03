@@ -12,7 +12,7 @@ Working from a fork of the repo will allow to make changes to the repo under you
 
 [Fork the repo](https://github.com/losier/Xenon/fork)
 
-### ### 2. Clone the repo locally
+### 2. Clone the repo locally
 
 ### 3. Install Dependencies
 
