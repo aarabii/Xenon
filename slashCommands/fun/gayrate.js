@@ -33,7 +33,6 @@ const {
         content: `${Member}'s Gay percentage`,
         embeds: [embed]
     })
-
     },
   };
   

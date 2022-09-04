@@ -2,7 +2,7 @@ const client = require("..");
 
 client.on('messageCreate', async (msg) => {
     if(msg.author.bot) return;
-    // if(msg.channel.id === '1013017767370305546' || '1007945165475946516') return;
+    if(msg.channel.id === '1013017767370305546' || '1007945165475946516') return;
 
     if(msg.content.toLowerCase().includes('hmm')) {
 
