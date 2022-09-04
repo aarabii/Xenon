@@ -1,6 +1,9 @@
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const fetch = require("node-fetch");
+
+const unescapeHtml = require("../../utils/unescape-html");
+
 const QUIZ_API_URL = "https://opentdb.com/api.php?amount=1&category=18&type=multiple&difficulty=";
 
 function shuffleQnA(qnaArray) {
@@ -13,9 +16,11 @@ async function getTriviaQuestion(difficulty) {
   const resultObject = results[0];
   const correct = { answerText: resultObject.correct_answer, isCorrect: true };
   const incorrect = resultObject.incorrect_answers.map((answer) => {
-    return { answerText: answer, isCorrect: false };
+    return { answerText: unescapeHtml(answer), isCorrect: false };
   });
-  const question = resultObject.question;
+  // Sometimes questions have html escape sequences, which adds to message length unnecessarily and unwantingly
+  // So we unescape those before sending them to Discord
+  const question = unescapeHtml(resultObject.question);
   const answers = shuffleQnA([correct, ...incorrect]);
   const qna = {
     question,
