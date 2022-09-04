@@ -1,5 +1,5 @@
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
-const dareTextColl = require("../../data/textData/dare.json");
+const dareTextColl = require("../../data/textData/Dare.json");
 
 module.exports = {
   name: "dare",
