@@ -16,7 +16,7 @@ const client = new Client({
 const config = require("./config.json");
 require("dotenv").config();
 
-client.commands = new Collection();
+// client.commands = new Collection();
 client.aliases = new Collection();
 client.slashCommands = new Collection();
 client.buttonInteractions = new Collection();
