@@ -2,7 +2,25 @@ const client = require("..");
 
 client.on('messageCreate', async (msg) => {
     if(msg.author.bot) return;
-    if(msg.channel.id === '1013017767370305546' || '1007945165475946516') return;
+
+    arrOfChannels = [
+        '1006596760560476312', // Welcome channel
+        '1007945165475946516', // anouncement channel
+        '1006631177920184420', // Role channel
+        '1006910839892213841', // server link channel
+        '1006930378143043634', // other com links
+        '1007138270582427780', // memes
+        '1007137320669040661', // help channel
+        '1007137398783742043', // theclp channel
+        '1007559827473567784', // showcase
+        '1006847243749445685', // resource
+        '1006596760560476314', // c resources
+        '1013017767370305546', // ai
+        '1006792693336252456', //musci cmd channel
+        '1006637008816443455', // tleac
+        '1007249496222216282', //support
+    ]
+    if(arrOfChannels.includes(msg.channel.id)) return;
 
     if(msg.content.toLowerCase().includes('hmm')) {
 

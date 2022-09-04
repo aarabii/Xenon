@@ -41,7 +41,7 @@ $ cp .env.sample .env
   https://discordjs.guide/popular-topics/webhooks.html#creating-webhooks-through-server-settings
 
   For Example - If your webhook url looks like this -  
-  `https://discord.com/api/webhooks/1015632774457204766/smTYeBU3JWkp4TTTODtEcJDCS2oT1GeAEKezEKVZqtksEkeMLBg9aKZ1igmxec7RDsES`,
+  `https://discord.com/api/webhooks/1234567891011121314/smTYeBU3JWkp4TTTODtEcJDCS2oTfvseAEKezTYvniassEkeMLBg9aKZX1igmxec7RDsES`,
   the first part is the `WEBHOOK_ID`, and the second is the `WEBHOOK_TOKEN`.
 
   The current webhooks used are for -
@@ -75,3 +75,5 @@ Start the bot -
 ```bash
 $ npm start
 ```
+
+---
