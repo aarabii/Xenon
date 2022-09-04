@@ -8,8 +8,6 @@ module.exports = (client) => {
   const buttonFiles = fs.readdirSync(`./buttons/`).filter((file) => file.endsWith(".js"));
   for (const file of buttonFiles) {
     const buttonI = require(`../buttons/${file}`);
-    // buttons.push(buttonI);
-    console.log(buttonI);
     if (buttonI.name) {
       client.buttonInteractions.set(buttonI.name, buttonI);
       table.addRow(file.split(".js")[0], "✅");

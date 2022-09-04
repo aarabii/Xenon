@@ -7,7 +7,7 @@ function shuffleQnA(qnaArray) {
   return qnaArray.sort(() => Math.random() - 0.5);
 }
 
-async function getTriviaQuestion(difficulty = "easy") {
+async function getTriviaQuestion(difficulty) {
   const response = await fetch(`${QUIZ_API_URL}${difficulty}`);
   const { results } = await response.json();
   const resultObject = results[0];
@@ -30,8 +30,23 @@ module.exports = {
   description: "Quiz on Tech Trivia",
   type: ApplicationCommandType.ChatInput,
   cooldown: 3000,
+  options: [
+    {
+      name: "difficulty",
+      description: "The difficulty of the question",
+      type: 3, // type 3 is string See List orderwise at - https://discordjs.guide/interactions/slash-commands.html#option-types
+      // Choices is presented, the value property is what we access
+      choices: [
+        { name: "Easy", value: "easy" },
+        { name: "Medium", value: "medium" },
+        { name: "Hard", value: "hard" },
+      ],
+      required: true,
+    },
+  ],
   run: async (client, interaction) => {
-    const qna = await getTriviaQuestion();
+    const difficultyChosen = interaction.options.get("difficulty").value;
+    const qna = await getTriviaQuestion(difficultyChosen);
     const row = new ActionRowBuilder().addComponents(
       ...qna.answers.map((answer, i) => {
         return new ButtonBuilder()
