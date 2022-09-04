@@ -1,4 +1,6 @@
 const client = require("..");
+const prefix = client.prefix
+const { EmbedBuilder } = require("discord.js");
 
 client.on('messageCreate', async (msg) => {
     if(msg.author.bot) return;
@@ -21,6 +23,24 @@ client.on('messageCreate', async (msg) => {
         '1007249496222216282', //support
     ]
     if(arrOfChannels.includes(msg.channel.id)) return;
+
+    if(msg.content.toLowerCase().startsWith(prefix)) {
+        const embed = new EmbedBuilder()
+        .setTitle("⚠️")
+        .setDescription("All the commands are slash commands now. Please use `/` to use the commands.")
+        .setColor("#ffffff")
+        .setTimestamp()
+        .setFooter({
+            text: 'This message will be deleted in 10 seconds.',
+        })
+        msg.reply({
+            embeds: [embed],
+        }).then((m) => {
+            setTimeout(() => {
+                m.delete()
+            }, 10000);
+        })
+    }
 
     if(msg.content.toLowerCase().includes('hmm')) {
 
