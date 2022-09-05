@@ -16,6 +16,9 @@ const client = new Client({
 const config = require("./config.json");
 require("dotenv").config();
 
+// connect to DB
+const db = require("./mongoose/mongoose");
+
 // client.commands = new Collection();
 client.aliases = new Collection();
 client.slashCommands = new Collection();

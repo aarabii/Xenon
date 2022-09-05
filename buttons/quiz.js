@@ -1,24 +1,9 @@
 const { EmbedBuilder } = require("discord.js");
-const mongoose = require("mongoose");
-
-const QUIZ_MONGODB_URI = process.env.QUIZ_MONGODB_URI || "mongodb://localhost:27017/quiz";
-
-const pointsSchema = new mongoose.Schema({
-  id: String,
-  points: Number,
-});
-
-const PointsModel = mongoose.model("Points", pointsSchema);
-
-async function connectToDB() {
-  await mongoose.connect(QUIZ_MONGODB_URI);
-}
+const PointsModel = require("../mongoose/schema/PointsModel");
 
 async function saveToDB(playerPoint) {
   await playerPoint.save();
 }
-
-connectToDB();
 
 module.exports = {
   name: "quiz",
