@@ -1,4 +1,5 @@
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
+const fetch = require("node-fetch");
 
 const PointsModel = require("../../mongoose/schema/PointsModel");
 
@@ -15,16 +16,26 @@ module.exports = {
     if (userPoints.length) {
       // Add only <= 10
       const descendingUserPoints = userPoints.sort((a, b) => b.points - a.points).slice(0, 10);
+
+      const leaderboardPoints = await Promise.all(
+        descendingUserPoints.map(async (ptObj) => {
+          const response = await fetch(`https://discord.com/api/v9/users/${ptObj.id}`, {
+            headers: {
+              Authorization: `Bot ${process.env.TOKEN}`,
+            },
+          });
+          const json = await response.json();
+
+          const dataObj = {
+            name: json.username,
+            value: `Points: ${ptObj.points.toString()}`,
+          };
+          return dataObj;
+        })
+      );
       embed = new EmbedBuilder()
         .setTitle("Quiz LeaderBoard")
-        .setFields(
-          ...descendingUserPoints.map((pointObj) => {
-            return {
-              name: `<@${pointObj.id}>`, //TODO: Get the username or mention them
-              value: pointObj.points.toString(),
-            };
-          })
-        )
+        .setFields(leaderboardPoints)
         .setColor("#ffffff")
         .setTimestamp()
         .setFooter({

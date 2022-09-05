@@ -7,9 +7,8 @@ client.on("messageCreate", async () => {
 
   process.setMaxListeners(0);
 
-  process.on("unhandledRejection", (error) => {   
-
-    if(error.startsWith("DiscordAPIError[50035]:")) return; // ignore this error
+  process.on("unhandledRejection", (error) => {
+    if (error.startsWith("DiscordAPIError[50035]:")) return; // ignore this error
 
     const errEmbed = new EmbedBuilder()
       .setTitle("Unhandled Rejection")
