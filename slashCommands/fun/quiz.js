@@ -1,21 +1,26 @@
 const { EmbedBuilder, ApplicationCommandType } = require("discord.js");
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 const fetch = require("node-fetch");
+
+const unescapeHtml = require("../../utils/unescape-html");
+
 const QUIZ_API_URL = "https://opentdb.com/api.php?amount=1&category=18&type=multiple&difficulty=";
 
 function shuffleQnA(qnaArray) {
   return qnaArray.sort(() => Math.random() - 0.5);
 }
 
-async function getTriviaQuestion(difficulty = "easy") {
+async function getTriviaQuestion(difficulty) {
   const response = await fetch(`${QUIZ_API_URL}${difficulty}`);
   const { results } = await response.json();
   const resultObject = results[0];
   const correct = { answerText: resultObject.correct_answer, isCorrect: true };
   const incorrect = resultObject.incorrect_answers.map((answer) => {
-    return { answerText: answer, isCorrect: false };
+    return { answerText: unescapeHtml(answer), isCorrect: false };
   });
-  const question = resultObject.question;
+  // Sometimes questions have html escape sequences, which adds to message length unnecessarily and unwantingly
+  // So we unescape those before sending them to Discord
+  const question = unescapeHtml(resultObject.question);
   const answers = shuffleQnA([correct, ...incorrect]);
   const qna = {
     question,
@@ -30,8 +35,23 @@ module.exports = {
   description: "Quiz on Tech Trivia",
   type: ApplicationCommandType.ChatInput,
   cooldown: 3000,
+  options: [
+    {
+      name: "difficulty",
+      description: "The difficulty of the question",
+      type: 3, // type 3 is string See List orderwise at - https://discordjs.guide/interactions/slash-commands.html#option-types
+      // Choices is presented, the value property is what we access
+      choices: [
+        { name: "Easy", value: "easy" },
+        { name: "Medium", value: "medium" },
+        { name: "Hard", value: "hard" },
+      ],
+      required: true,
+    },
+  ],
   run: async (client, interaction) => {
-    const qna = await getTriviaQuestion();
+    const difficultyChosen = interaction.options.get("difficulty").value;
+    const qna = await getTriviaQuestion(difficultyChosen);
     const row = new ActionRowBuilder().addComponents(
       ...qna.answers.map((answer, i) => {
         return new ButtonBuilder()
