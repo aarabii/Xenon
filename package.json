@@ -15,7 +15,7 @@
     "node": "^18.9.1"
   },
   "dependencies": {
-    "@discordjs/rest": "^1.1.0",
+    "@discordjs/rest": "^1.2.0",
     "ascii-table": "^0.0.9",
     "canvacord": "^5.4.7",
     "chalk": "^2.4.2",
