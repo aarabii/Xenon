@@ -19,7 +19,7 @@
     "ascii-table": "^0.0.9",
     "canvacord": "^5.4.8",
     "chalk": "^2.4.2",
-    "discord-api-types": "^0.37.10",
+    "discord-api-types": "^0.37.11",
     "discord.js": "^14.5.0",
     "dotenv": "^16.0.2",
     "dream-api": "^1.0.8",
