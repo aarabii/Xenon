@@ -12,7 +12,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "node": "^19.0.1"
+    "node": "^19.2.0"
   },
   "dependencies": {
     "@discordjs/rest": "^1.4.0",
